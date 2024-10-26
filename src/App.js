@@ -43,17 +43,25 @@ const questions = [
 ];
 
 function FlashCard() {
-  const [selected, setSelected] = useState(null);
+  function EventHandler(id) {
+    setSelectedId(id !== selectedId ? id : "");
+  }
+  const [selectedId, setSelectedId] = useState(null);
   return (
-    <div className="flashcards" onClick={EventHandler}>
+    <div className="flashcards">
       {questions.map((questions) => (
-        <div key={questions.id}>
-          <p>{questions.question}</p>
+        <div
+          key={questions.id}
+          onClick={() => EventHandler(questions.id)}
+          className={questions.id === selectedId ? "selected" : ""}
+        >
+          <p>
+            {questions.id === selectedId
+              ? questions.answer
+              : questions.question}
+          </p>
         </div>
       ))}
     </div>
   );
-}
-function EventHandler() {
-  <div>style={{ backGroundColor: "red" }}</div>;
 }
